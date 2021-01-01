@@ -19,16 +19,28 @@ import org.springframework.web.servlet.ModelAndView;
 import vn.iuh.beans.CTHD;
 import vn.iuh.beans.HoaDon;
 import vn.iuh.beans.KhachHang;
+import vn.iuh.beans.LoaiSP;
+import vn.iuh.beans.NhaSanXuat;
 import vn.iuh.beans.SanPham;
+import vn.iuh.beans.TaiKhoan;
 import vn.iuh.dao.CTHDDao;
 import vn.iuh.dao.HoaDonDao;
 import vn.iuh.dao.KhachHangDao;
+import vn.iuh.dao.LoaiSPDao;
+import vn.iuh.dao.MauSacDao;
+import vn.iuh.dao.NhaSanXuatDao;
 import vn.iuh.dao.SanPhamDao;
 import vn.iuh.entities.GioHang;
 
 @Transactional
 @Controller
 public class GioHangController {
+	@Autowired
+	private	NhaSanXuatDao nhaSXDao;
+	@Autowired
+	private	MauSacDao mauSacDao;
+	@Autowired
+	private	LoaiSPDao loaiSPDao;
 	@Autowired
 	CTHDDao cthdDao;
 	@Autowired
@@ -50,25 +62,30 @@ public class GioHangController {
 	
 	@RequestMapping(value = "thanhtoanView", method = RequestMethod.GET)
 	public ModelAndView thanhtoanView() {
-		
+		if (DangNhapController.taiKhoan==null) {
+			return new DangNhapController().dangNhapView();
+		}
 //		System.out.println(x);
-		return new ModelAndView("thanhtoanForm");
+		return new ModelAndView("thanhtoanForm","kh",khachhangDao.getKH(DangNhapController.taiKhoan.getId()));
 	}
 	@RequestMapping(value = "thanhtoan", method = RequestMethod.POST)
 	public ModelAndView thanhtoan(@Validated @ModelAttribute("kh")KhachHang x) {
-		// tao hoa don
-		KhachHang kh = khachhangDao.getKH(x.getMaKH());
+		// tao hoa don	
+		KhachHang kh = khachhangDao.getKH(DangNhapController.taiKhoan.getId());
+		if (kh==null) {
+			return new ModelAndView("themthongtinKh","kh", new KhachHang());
+		}
 		HoaDon hoaDon = new HoaDon(kh, LocalDate.now());
 		String message ="";
-		if (hoadonDao.addHD(hoaDon)) {
-			
+		if (hoadonDao.addHD(hoaDon)) {		
 			for(GioHang g : gioHangs) {
 				CTHD cthd = new CTHD(hoaDon,g.getSanPham(),g.getSoluong());
 				cthdDao.themCTHD(cthd);
-				
+			
 			}
 			
 			message ="Đặt hàng thành công ";
+			gioHangs.removeAll(gioHangs);
 		}else {
 			message ="Đặt hàng thất bại , vui lòng kiểm tra lại thông tin";
 		}
@@ -96,17 +113,26 @@ public class GioHangController {
 		
 		return new ModelAndView("giohangForm");
 	}
-	
-	
-	
 	@ModelAttribute("dsGioHang")
 	public List<GioHang> getListGioHang(){
 		
 		return gioHangs;
 	}
-	@ModelAttribute("kh")
-	public KhachHang getKhacHang(){
-		
-		return  khachhangDao.getKH(1);
+
+	@ModelAttribute ("tk1")
+	public TaiKhoan TaiKhoan() {
+		return DangNhapController.taiKhoan;
+	}
+	@ModelAttribute("nhaSX")
+	public List<NhaSanXuat> getListNhaSX(){
+			List<NhaSanXuat> list =new ArrayList<NhaSanXuat>();
+			list = nhaSXDao.getListNhaSX();
+		return list;
+	}
+	@ModelAttribute("loaiSP")
+	public List<LoaiSP> getListLoaiSP(){
+			List<LoaiSP> list =new ArrayList<LoaiSP>();
+			list = loaiSPDao.getListLoaiSP();
+		return list;
 	}
 }

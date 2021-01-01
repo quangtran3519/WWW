@@ -132,6 +132,18 @@ public class SanPhamDao {
 		}
 		return list;
 	}
+
+
+	public List<SanPham> timkiemSP(String kq) {
+		List<SanPham> list =null;
+		Session session = factory.openSession();
+		try {
+			list = session.createNativeQuery("select * from SanPham where tenSP like '"+kq+"'", SanPham.class).getResultList();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return list;
+	}
 	
 	
 }

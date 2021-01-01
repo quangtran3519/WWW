@@ -1,15 +1,18 @@
 package vn.iuh.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import vn.iuh.beans.KhachHang;
+import vn.iuh.beans.SanPham;
+import vn.iuh.beans.TaiKhoan;
 
 @Repository
-public class KhachHangDao {
+public class TaiKhoanDao {
 	@Autowired
 	SessionFactory factory;
 	
@@ -22,29 +25,28 @@ public class KhachHangDao {
 	public void setFactory(SessionFactory factory) {
 		this.factory = factory;
 	}
-
-
-	public KhachHang getKH(int id) {
-		KhachHang x = new KhachHang();
-		Session session = factory.openSession();
-		Transaction transaction = session.beginTransaction();
+	public TaiKhoan getTaikhoan(String tenTk){
+		TaiKhoan taiKhoan = null;
+		Session session = factory.getCurrentSession();
 		try {
-			x =session.find(KhachHang.class, id);
-			transaction.commit();
-	
+			List<TaiKhoan>list = session.createNativeQuery("select * from TaiKhoan where tenTk ='"+tenTk+"'", TaiKhoan.class).getResultList();
+			for (TaiKhoan x : list) {
+				taiKhoan = x;
+			}
 		} catch (Exception e) {
-			transaction.rollback();
+			// TODO: handle exception
 		}
-		return x;
+		return taiKhoan;
 	}
 
 
-	public boolean updateKH(KhachHang x) {
+	public boolean addKH(TaiKhoan taiKhoan) {
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
 		
 		try {
-			session.saveOrUpdate(x);
+			
+			session.save(taiKhoan);
 			transaction.commit();
 			return true;
 		} catch (Exception e) {
@@ -53,6 +55,22 @@ public class KhachHangDao {
 		
 		
 		return false;
+		
+	}
+
+
+	public void doiMK(TaiKhoan x) {
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		try {		
+			session.update(x);
+			transaction.commit();
+			
+		} catch (Exception e) {
+			transaction.rollback();
+		}
+		
 	}
 	
 

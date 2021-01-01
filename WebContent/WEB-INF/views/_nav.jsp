@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div style="background-color: black">
-<div class="container">
+<div style="margin-left:65px">
 
 	<div class="row">
 		<div class="col-md-12" style="height: 50px;">
@@ -69,10 +69,25 @@
 					<li><a href="qlsanpham">Danh Sách Sản Phẩm</a></li>
 					<li><a href="dieukhoan.html">ĐIỀU KHOẢN</a></li>
 					<li><a href="gioithieuView">GIỚI THIỆU</a></li>
-					<li><a href="">LIÊN HỆ</a></li>
-
-
-
+					<li><a href="">LIÊN HỆ</a></li>		
+					
+					<c:choose>
+					<c:when  test="${tk1.quyen == 'User'}">
+						
+					 </c:when>	
+					 	<c:when  test="${tk1.quyen=='Admin'}">
+							<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="">Quản lý <span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="pc.html">Sản Phẩm</a></li>
+							<li><a href="laptopkythuat.html">Khách Hàng</a></li>
+							<li><a href="laptoptheohangView">Hóa Đơn</a></li>
+						</ul></li>	
+								
+					 </c:when>		
+					
+					</c:choose>
 				</ul>
 			</nav>
 

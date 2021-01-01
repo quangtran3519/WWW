@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+<base href="${pageContext.servletContext.contextPath }/">
 	<title>Đăng nhập</title>
 	<jsp:include page="_head.jsp"></jsp:include>
 	<script>
@@ -14,10 +18,7 @@
 				$("#tbtk").html("*Tài khoản không được bỏ trống");
 				return false;
 			}
-			if(!regex.test(tk)){
-				$("#tbtk").html("*Tài khoản không tồn tại hoặc nhập sai");
-				return false;
-			}
+			
 			$("#tbtk").html("*");
 			return true;
 		}
@@ -28,20 +29,11 @@
 				$("#tbmk").html("*mật khẩu không được bỏ trống");
 				return false;
 			}
-			if(!regex.test(mk)){
-				$("#tbmk").html("*Mật khẩu sai");
-				return false;
-			}
-			
+						
 			$("#tbmk").html("*");
 			return true;
 		}
-
-		$("#btndk").click( function(){
-				if(!validTK()||!validMK())
-					return false;	
-                    location.assign("Home.html");
-		});
+	
 	});
 	</script>
 </head>
@@ -95,38 +87,43 @@
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-6" style="position: static;">
-			<form class=" form" >
-				<caption ><h3 >ĐĂNG NHẬP</h3></caption>
+		
+		<form:form action="${pageContext.servletContext.contextPath }/dangnhap" method="post" modelAttribute="tk">		
+		<form class=" form" >
+		<caption ><h3 >ĐĂNG NHẬP</h3></caption>
 				<div class="row" >
 					<label class="col-md-4" style="position: static;">Tài khoản </label>
-					<div class="col-md-8" style="position: static;"><input type="text" id="taikhoan" placeholder="Bạn hãy nhập tài khoản" class="form-control" autocomplete="off"
-						value="admin"><span class="text-danger" id="tbtk">*</span>
+					<div class="col-md-8" style="position: static;"><form:input path="tenTk" type="text" id="taikhoan" placeholder="Bạn hãy nhập tài khoản" class="form-control" autocomplete="off"
+						></form:input><span class="text-danger" id="tbtk"></span>
 					 
 					 </div>
 				</div>
 				<div class="row ">
 					<label class="col-md-4" style="position: static;">Mật khẩu</label>
-					<div class="col-md-8" style="position: static;"><input type="password" id="mk" placeholder=" Bạn hãy nhập mật khẩu" class="form-control" autocomplete="off"
-						value="admin"><span class="text-danger" id="tbmk">*</span>
+					<div class="col-md-8" style="position: static;"><form:input path="matkhau" type="password" id="mk" placeholder=" Bạn hãy nhập mật khẩu" class="form-control" autocomplete="off"
+						></form:input><span class="text-danger" id="tbmk"></span>
 					 </div> 
 					 
 				</div>
 				<div class="row ">
 					<div class="col-md-4"></div>
 					<div class="col-md-8" style="position: static;">
-						<input type="button" id="btndk" value="Đăng nhập"  class="btn btn-success btn-block" >
+						<form:button class="btn btn-success btn-block" >Đăng nhập</form:button>
+						<div style="color: red;">${message }</div>
 					 </div>
                 </div>
+                </form>
+                 </form:form>
+              	
+			
                 <div class="row ">
 					<div class="col-md-3" style="position: static;">
                         <a href="#">Quên mật khẩu ? </a>
                     </div>
 					<div class="col-md-9" style="position: static;">
-						Nếu bạn chưa có tài khoản <a href="formdangki.html">Ấn vào đây để đăng kí</a>
+						Nếu bạn chưa có tài khoản <a href="dangkitk">Ấn vào đây để đăng kí</a>
 					 </div>
-				</div>
-			
-			</form>
+				</div>			
 		</div>
 		<div class="col-md-3"></div>
 	</div>

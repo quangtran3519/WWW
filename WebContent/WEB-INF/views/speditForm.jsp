@@ -8,9 +8,17 @@
 <head>
 <meta charset="UTF-8">
 <title>CHỈNH SỬA SẢN PHẨM</title>
+<jsp:include page="_head.jsp"></jsp:include>
 </head>
 <body>
-	<h1>CHỈNH SỬA SẢN PHẨM</h1>
+	<header>
+		<jsp:include page="_header.jsp"></jsp:include>
+	</header>
+	<nav>
+		<jsp:include page="_nav.jsp"></jsp:include>
+	</nav>
+	<a href="${pageContext.servletContext.contextPath }/admin/qlsanpham">Quay lại trang quản lý</a>
+	<h2 style="margin-left: 480px;">CHỈNH SỬA SẢN PHẨM</h2>
 	<form:form action="${pageContext.servletContext.contextPath }/admin/updateSP" method="post" modelAttribute="sanpham">
 	<table>
 		<tr>
@@ -107,6 +115,7 @@
 	
 	</form:form>
 	<div>${message }</div>
-	<a href="${pageContext.servletContext.contextPath }/admin/qlsanpham">Quay lại trang quản lý</a>
+	
+	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>

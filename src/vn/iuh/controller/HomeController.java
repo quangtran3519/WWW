@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.iuh.beans.LoaiSP;
+import vn.iuh.beans.TaiKhoan;
 import vn.iuh.beans.NhaSanXuat;
 import vn.iuh.beans.NuocSanXuat;
 import vn.iuh.beans.SanPham;
@@ -55,6 +57,16 @@ public class HomeController {
 			
 			return new ModelAndView("gioithieuForm");
 		}
+		@RequestMapping(value = "dieukhoanView" , method =  RequestMethod.GET)
+		public ModelAndView dieukhoanView() {
+			
+			return new ModelAndView("dieuKhoan");
+		}
+		@RequestMapping(value = "lienheView", method =  RequestMethod.GET)
+		public ModelAndView lienheView() {
+			
+			return new ModelAndView("lienheForm");
+		}
 		@RequestMapping(value = "laptoptheohangView/{id}")
 		public ModelAndView laptoptheohangView( @PathVariable int id) {
 				List<SanPham> sanPhams =sanphamdao.getDStheoHang(id);
@@ -71,6 +83,11 @@ public class HomeController {
 			
 			return new ModelAndView("chitietsanphamForm","sp",sanPham );
 			
+		}
+		@RequestMapping(value ="timtiemView", method = RequestMethod.POST)
+		public ModelAndView timkiemView(@RequestParam(value = "search") String kq) {
+				List<SanPham> list = sanphamdao.timkiemSP(kq);
+			return new ModelAndView("timKiemForm","listSP",list);
 		}
 		//hienthi danh sach nuoc sx 
 		@ModelAttribute("nuocSX")
@@ -92,5 +109,9 @@ public class HomeController {
 				List<LoaiSP> list =new ArrayList<LoaiSP>();
 				list = loaiSPDao.getListLoaiSP();
 			return list;
+		}
+		@ModelAttribute ("tk1")
+		public TaiKhoan TaiKhoan() {
+			return DangNhapController.taiKhoan;
 		}
 }

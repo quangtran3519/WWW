@@ -6,13 +6,8 @@
 <head>
 	
 	<title>Giỏ hàng của bạn</title>
-	<meta charset="utf-8">
 	<base href="${pageContext.servletContext.contextPath }/">
-	<link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css" >
-	<link rel="stylesheet" type="text/css" href="resources/css/style.css">
-	<link rel="stylesheet" type="text/css" href="resources/css/fotorama.css">
-	<script src="resources/JS/jquery.min.js"></script>
-	<script src="resources/JS/bootstrap.min.js"></script>
+	
 	<jsp:include page="_head.jsp"></jsp:include>
 <style type="text/css">
 	th,td{
@@ -37,10 +32,10 @@
 	
 <div class="container" id="main">
 	<div class="row" style="text-align: center;">
-		<p style="font-weight: bold;font-size: 28px">GIỎ HÀNG</p>
+		<p style="font-weight: bold;font-size: 28px; margin-top:-100px">GIỎ HÀNG</p>
 	</div>
-	<div class="row">
-		<table >
+	<div class="row" style="margin-top:-50px;" >
+		<table border="solid 1px black"  width= 1200px; border-collapse= collapse;>
 			<tr>
 				<th>Sản phẩm</th>
 				<th>Tên Sản phẩm</th>
@@ -64,13 +59,13 @@
 	</div>
 
 	<div style="text-align: right;">
-		<a href="thanhtoanView"><button class="btn btn-primary" style="margin: 20px;margin-right: 300px">
+		<a href="thanhtoanView"><button class="btn btn-primary" style="margin-top: 20px;">
 			THANH TOÁN
 		</button></a>
 	</div>
 	
 </div>
-<footer style="margin-top:110px">
+<footer style="margin-top:155px">
 		<jsp:include page="_footer.jsp"></jsp:include>
 	
 	</footer>

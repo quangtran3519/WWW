@@ -14,6 +14,8 @@
 	font-size: 26px;
 	font-weight: bold;
 }
+
+
 </style>
 <title>Thêm sản phẩm mới</title>
 </head>
@@ -24,124 +26,128 @@
 	<nav>
 		<jsp:include page="_nav.jsp"></jsp:include>
 	</nav>
+	<a href="${pageContext.servletContext.contextPath }/qlsanpham"> Quay
+		lại trang quản lý</a>
 	<h3 id="titlethem">THÊM 1 SẢN PHẨM MỚI</h3>
 	<form:form action="${pageContext.servletContext.contextPath }/themSP"
 		method="post" modelAttribute="sanpham" enctype="multipart/form-data">
-		<div style="width: 1000px;height:300px">
+		<div style="width: 1000px;height:400px; margin_left:100px">
 
-			<div style="float:left; width: 50%">
-				<tr>
-					<td>Tên sản phẩm:</td>
-					<td><form:input path="tenSP" /> <form:errors path="tenSP"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Nước sản xuất</td>
-					<td><form:select path="nuocsanxuat.maNuoc" items="${nuocSX}"
-							itemValue="maNuoc" itemLabel="tenNuoc"></form:select></td>
-				</tr><br>
-				<tr>
-					<td>Nhà sản xuất</td>
-					<td><form:select path="nhasanxuat.maNhaSX" items="${nhaSX}"
-							itemValue="maNhaSX" itemLabel="tenNhaSX"></form:select></td>
-				</tr><br>
-				<tr>
-					<td>Màu sắc</td>
-					<td><form:select path="mauSac.maMau" items="${mauSac}"
-							itemValue="maMau" itemLabel="tenMau"></form:select></td>
+			<div style="float:left; width: 30%">
+					<p>Tên sản phẩm:</p>
+					<form:input path="tenSP" /> <form:errors path="tenSP"></form:errors>
+				<br>
+			
+					<p>Nước sản xuất</p>
+					<form:select path="nuocsanxuat.maNuoc" items="${nuocSX}"
+							itemValue="maNuoc" itemLabel="tenNuoc"></form:select>
+				<br>
+			
+					<p>Nhà sản xuất</p>
+					<form:select path="nhasanxuat.maNhaSX" items="${nhaSX}"
+							itemValue="maNhaSX" itemLabel="tenNhaSX"></form:select>
+				<br>
+				
+					<p>Màu sắc</p>
+					<form:select path="mauSac.maMau" items="${mauSac}"
+							itemValue="maMau" itemLabel="tenMau"></form:select>
 
-				</tr><br>
-				<tr>
-					<td>Loại sản phẩm :</td>
-					<td><form:select path="loai.maLoai" items="${loaiSP}"
-							itemValue="maLoai" itemLabel="tenLoai"></form:select></td>
+				<br>
+				
+					<p>Loại sản phẩm :</p>
+					<form:select path="loai.maLoai" items="${loaiSP}"
+							itemValue="maLoai" itemLabel="tenLoai"></form:select>
 
-				</tr><br>
-				<tr>
-					<td>Giá:</td>
-					<td><form:input path="gia" /> <form:errors path="gia"></form:errors>
-					</td>
+				<br>
+				
+					<p>Giá:</p>
+					<form:input path="gia" /> <form:errors path="gia"></form:errors>
+					
 
-				</tr><br>
-				<tr>
+				<br>
+				
 
-					<td>Hình</td>
-					<td><form:input path="urlHinh" type="text" value="Hình"
-							readonly="true" /></td>
-				<tr><br>
-					<td></td>
-					<td><input type="file" name="photo"></td>
-					<!-- <td> <input type="file"  value="urlHinh"> </td> -->
+					<p>Hình</p>
+					<form:input path="urlHinh" type="text" value="Hình"
+							readonly="true" />
+				<br>
+					<p></p>
+					<input type="file" name="photo">
+					<!-- <p> <input type="file"  value="urlHinh"> </p> -->
 
-				</tr><br>
+				<br>
 			</div>
-			<div style="float: right; width: 50%">
-				<tr>
-					<td><b>Cấu hình</b></td>
-				</tr><br>
-				<tr>
+			<div style="float: left; width: 30%">
+				
+					<p><b>Cấu hình</b></p>
+				<br>
+				
+					<p>CPU</p>
+					<form:input path="cauHinh.cpu" /> <form:errors
+							path="cauHinh.cpu"></form:errors>
+				<br>
 
-					<td>CPU</td>
-					<td><form:input path="cauHinh.cpu" /> <form:errors
-							path="cauHinh.cpu"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Ram</td>
-					<td><form:input path="cauHinh.ram" /> <form:errors
-							path="cauHinh.ram"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Ổ cứng</td>
-					<td><form:input path="cauHinh.oCung" /> <form:errors
-							path="cauHinh.oCung"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Màn hình</td>
-					<td><form:input path="cauHinh.manHinh" /> <form:errors
-							path="cauHinh.manHinh"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Card đồ họa</td>
-					<td><form:input path="cauHinh.cardDohoa" /> <form:errors
-							path="cauHinh.cardDohoa"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Cổng kết nối</td>
-					<td><form:input path="cauHinh.congKetnoi" /> <form:errors
-							path="cauHinh.congKetnoi"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Hệ điều hành</td>
-					<td><form:input path="cauHinh.hdh" /> <form:errors
-							path="cauHinh.hdh"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Thiết kế</td>
-					<td><form:input path="cauHinh.thietKe" /> <form:errors
-							path="cauHinh.thietKe"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Kích thước</td>
-					<td><form:input path="cauHinh.kichThuoc" /> <form:errors
-							path="cauHinh.kichThuoc"></form:errors></td>
-				</tr><br>
-				<tr>
-					<td>Năm sản xuất</td>
-					<td><form:input path="cauHinh.namSX" /> <form:errors
-							path="cauHinh.namSX"></form:errors></td>
-				</tr><br>
+					<p>Ram</p>
+					<form:input path="cauHinh.ram" /> <form:errors
+							path="cauHinh.ram"></form:errors>
+				<br>
+				
+					<p>Ổ cứng</p>
+					<form:input path="cauHinh.oCung" /> <form:errors
+							path="cauHinh.oCung"></form:errors>
+				<br>
+				
+					
 			</div>
 
-			<div>
-				<input type="submit" value="Lưu"> <input type="reset"
-					value="Xóa trắng">
+			<div style="float: right; width: 40%">
+				
+				
+				
+					<p>Màn hình</p>
+					<form:input path="cauHinh.manHinh" /> <form:errors
+							path="cauHinh.manHinh"></form:errors>
+				<br>
+				
+					<p>Card đồ họa</p>
+					<form:input path="cauHinh.cardDohoa" /> <form:errors
+							path="cauHinh.cardDohoa"></form:errors>
+				<br>
+				
+					<p>Cổng kết nối</p>
+					<form:input path="cauHinh.congKetnoi" /> <form:errors
+							path="cauHinh.congKetnoi"></form:errors>
+				<br>
+				
+					<p>Hệ điều hành</p>
+					<form:input path="cauHinh.hdh" /> <form:errors
+							path="cauHinh.hdh"></form:errors>
+				<br>
+				
+					<p>Thiết kế</p>
+					<form:input path="cauHinh.thietKe" /> <form:errors
+							path="cauHinh.thietKe"></form:errors>
+				<br>
+				
+					<p>Kích thước</p>
+					<form:input path="cauHinh.kichThuoc" /> <form:errors
+							path="cauHinh.kichThuoc"></form:errors>
+				<br>
+				
+					<p>Năm sản xuất</p>
+					<form:input path="cauHinh.namSX" /> <form:errors
+							path="cauHinh.namSX"></form:errors>
+				<br>
 			</div>
 
 		</div>
-
+		<div>
+				<input type="submit" value="Lưu"> <input type="reset"
+					value="Xóa trắng">
+			</div>
 	</form:form>
 	<div>${message }</div>
-	<a href="${pageContext.servletContext.contextPath }/qlsanpham">Quay
-		lại trang quản lý</a>
+	
 
 	<footer>
 		<jsp:include page="_footer.jsp"></jsp:include>

@@ -30,6 +30,7 @@ import vn.iuh.beans.MauSac;
 import vn.iuh.beans.NhaSanXuat;
 import vn.iuh.beans.NuocSanXuat;
 import vn.iuh.beans.SanPham;
+import vn.iuh.beans.TaiKhoan;
 import vn.iuh.dao.CauHinhDao;
 import vn.iuh.dao.LoaiSPDao;
 import vn.iuh.dao.MauSacDao;
@@ -184,7 +185,10 @@ public class QuanLySanPhamController {
 	}	
 		
 	}
-	
+	@ModelAttribute ("tk1")
+	public TaiKhoan TaiKhoan() {
+		return DangNhapController.taiKhoan;
+	}
 	
 	
 }

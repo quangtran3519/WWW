@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<div style="background-image: url(resources/img/footer.jpg); color: aliceblue; margin-top: 20px">
 <div class=container>
 	<div class="row">
 		<div class="col-md-3">

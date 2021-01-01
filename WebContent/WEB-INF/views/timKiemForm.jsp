@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>LAPTOP DELL</title>
+<title>Kết quả tìm kiếm</title>
 
 <base href="${pageContext.servletContext.contextPath }/">
 <jsp:include page="_head.jsp"></jsp:include>
@@ -33,11 +33,7 @@
 		</nav>
 	</header>
 	<div class="container">
-	<div class="row">
-		<div>
-			<a href="laptopqv">Trang chủ <span>></span></a> <span>DELL</span>
-		</div>
-	</div>
+	
 	<div class="row">
 	<c:forEach var="sp" items="${listSP}">
 		<div class="row">
